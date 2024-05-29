@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { BiMenuAltRight } from "react-icons/bi";
+import { getMenuStyles } from "../../utils/common";
+import useHeaderColor from "../../hooks/useHeaderColor";
 import OutsideClickHandler from "react-outside-click-handler";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-
-  const getMenuStyles = (menuOpened) => {
-    if (document.documentElement.clientWidth <= 800) {
-      return { right: menuOpened ? "0" : "-100%" };
-    }
-    return {};
-  };
+  const headerColor = useHeaderColor();
 
   return (
-    <section className="h-wrapper">
-      <div className="flexCenter paddings innerWidth h-container">
+    <section className="h-wrapper" style={{ background: headerColor }}>
+      <div className="flexCenter innerWidth paddings h-container">
         <img src="./logo.png" alt="logo" width={100} />
 
         <OutsideClickHandler
@@ -29,7 +25,7 @@ const Header = () => {
             <a href="#contact-us">Contact Us</a>
             <a href="#get-started">Get Started</a>
             <button className="button">
-              <a href="mailto:exemplasimple@gmail.com">Contact</a>
+              <a href="mailto:examplesimple@gmail.com">Contact</a>
             </button>
           </div>
         </OutsideClickHandler>
