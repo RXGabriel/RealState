@@ -80,3 +80,39 @@ export const cancelBooking = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+
+export const toFav = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const { rid } = req.params;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (user.favResidenciesId.includes(rid)) {
+      const updateUser = await prisma.user.update({
+        where: { email: email },
+        data: {
+          favResidenciesId: {
+            set: user.favResidenciesId.filter((id) => id !== rid),
+          },
+        },
+      });
+
+      res.send({ message: "Removed from favorites", user: updateUser });
+    } else {
+      const updateUser = await prisma.user.update({
+        where: { email: email },
+        data: {
+          favResidenciesId: {
+            push: rid,
+          },
+        },
+      });
+      res.send({ message: "Updated favorites", user: updateUser });
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
