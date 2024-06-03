@@ -1,11 +1,16 @@
+import { Suspense } from "react";
 import "./App.css";
 import Website from "./pages/Website";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-      <Website />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Website />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
