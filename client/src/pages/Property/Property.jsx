@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { getProperty } from "../../utils/api";
 import { PuffLoader } from "react-spinners";
+import { AiFillHeart } from "react-icons/ai";
 import "./Property.css";
 
 const Property = () => {
@@ -31,7 +32,19 @@ const Property = () => {
     );
   }
 
-  return;
+  return (
+    <div className="wrapper">
+      <div className="flexColStart paddings innerWidth property-container">
+        {/* like button */}
+        <div className="like">
+          <AiFillHeart size={24} color="white" />
+        </div>
+
+        {/* image */}
+        <img src={data?.image} alt="home image" />
+      </div>
+    </div>
+  );
 };
 
 export default Property;
