@@ -42,6 +42,19 @@ const Property = () => {
 
         {/* image */}
         <img src={data?.image} alt="home image" />
+
+        <div className="flexCenter property-details">
+          {/*  left */}
+          <div className="flexColStart left">
+            {/* head */}
+            <div className="flexStart head">
+              <span className="primaryText">{data?.title}</span>
+              <span className="orangeText" style={{ fontSize: "1.5rem" }}>
+                $ {data?.price}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
