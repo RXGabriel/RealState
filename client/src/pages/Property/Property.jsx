@@ -5,7 +5,7 @@ import { PuffLoader } from "react-spinners";
 import { AiFillHeart } from "react-icons/ai";
 import { FaShower } from "react-icons/fa";
 import { AiTwotoneCar } from "react-icons/ai";
-import { MdMeetingRoom } from "react-icons/md";
+import { MdMeetingRoom, MdLocationPin } from "react-icons/md";
 import "./Property.css";
 
 const Property = () => {
@@ -59,18 +59,36 @@ const Property = () => {
 
             {/* facilities */}
             <div className="flexStart facilities">
+              {/* bathrooms */}
               <div className="flexStart facility">
                 <FaShower size={20} color="#1F3E72" />
                 <span>{data?.facilities.bathrooms} Bathrooms</span>
               </div>
+
+              {/* parkings */}
               <div className="flexStart facility">
                 <AiTwotoneCar size={20} color="#1F3E72" />
                 <span>{data?.facilities.parkings} Parking</span>
               </div>
+
+              {/* rooms */}
               <div className="flexStart facility">
                 <MdMeetingRoom size={20} color="#1F3E72" />
                 <span>{data?.facilities.bedrooms} Room/s</span>
               </div>
+            </div>
+
+            {/* description */}
+            <span className="secondaryText" style={{ textAlign: "justify" }}>
+              {data?.description}
+            </span>
+
+            {/* address */}
+            <div className="flexStart">
+              <MdLocationPin size={25} />
+              <span className="secondaryText">
+                {data?.address} {data?.city} {data?.country}
+              </span>
             </div>
           </div>
         </div>
