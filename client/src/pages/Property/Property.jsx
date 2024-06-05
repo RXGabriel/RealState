@@ -8,6 +8,10 @@ import { AiTwotoneCar } from "react-icons/ai";
 import { MdMeetingRoom, MdLocationPin } from "react-icons/md";
 import "./Property.css";
 import Map from "../../components/Map/Map";
+import BookingModal from "../../components/BookingModal/BookingModal";
+import { useState } from "react";
+import useAuthCheck from "../../hooks/useAuthCheck";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Property = () => {
   const { pathname } = useLocation();
@@ -15,6 +19,10 @@ const Property = () => {
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
+
+  const [modalOpened, setModalOpened] = useState(false);
+  const { validateLogin } = useAuthCheck();
+  const { user } = useAuth0();
 
   if (isLoading) {
     return (
@@ -93,13 +101,19 @@ const Property = () => {
             </div>
 
             {/* booking button */}
-            <button className="map">
-              <Map
-                address={data?.address}
-                city={data?.city}
-                country={data?.country}
-              />
-            </button>
+            <button
+              className="button"
+              onClick={() => {
+                validateLogin() && setModalOpened(true);
+              }}
+            ></button>
+
+            <BookingModal
+              opened={modalOpened}
+              setOpened={setModalOpened}
+              propertyId={id}
+              email={user?.email}
+            />
           </div>
 
           {/* right side */}
